@@ -16,6 +16,10 @@
             margin: 0 auto;
             margin-top: 80px;
         }
+        select.form-control:not([size]):not([multiple]) {
+            height: calc(2.25rem + 2px);
+            width: 200px;
+        }
     </style>
 
 
