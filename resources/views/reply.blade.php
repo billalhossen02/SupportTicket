@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="app.css">
     <title>Ticket Reply</title>
+   <style>
+    textarea.form-control 
+    {
+    height: auto;
+    width: 500px;
+    }
+    </style>
 </head>
   <body style="margin-top: 30px; margin-left: 200px;">
 
