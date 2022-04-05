@@ -1,0 +1,45 @@
+.col-md-10
+{
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.header{
+    background-color: rgb(78, 158, 84);
+    color: blanchedalmond;
+    font-weight: 650;
+    letter-spacing: 1.5px;
+}
+
+form label {
+    color:rgb(138, 24, 24)
+}
+
+.table{
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 120px;
+}
+
+thead{
+    background-color: rgb(78, 158, 84);
+    color: blanchedalmond;
+}
+
+.float{
+
+    float:right;
+
+}
+
+.pagi{
+
+    padding-top:20px;
+}
+
+.clear{
+  clear:both;
+}
