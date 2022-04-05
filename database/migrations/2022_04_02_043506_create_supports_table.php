@@ -17,7 +17,7 @@ class CreateSupportsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('ticket_id')->nullable();
             $table->foreign('ticket_id')->references('id')->on('support_details')->onDelete('cascade');
-            $table->integer('user_id')->nullable();
+            $table->string('role')->nullable();
             $table->string('message')->nullable();
             $table->string('attachment')->nullable();
             $table->timestamps();
