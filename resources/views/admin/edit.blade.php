@@ -24,7 +24,7 @@
   <div class="container design">
       <div class='row'>
       <div class="col-md-6">
-          <h3 class="header">TICKET</h3>
+          <h3 class="header">TICKET NO #{{$data->id}}</h3>
           <hr>
         <div class="form-row">
           <div class="form-group col-md-6">
