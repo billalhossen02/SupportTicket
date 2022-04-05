@@ -107,24 +107,24 @@ class TicketController extends Controller
 
         $data = New Support();
         $data->ticket_id = $id;
-        $data->user_id =Auth::user()->id;
+        $data->role = 'Admin';
         $data->message = $request->message;
 
        if($attachment = $request->file('attachment'))
        {
-        $dest = 'Attachment2';
+        $dest = 'Attachment';
         $getext = date('Ymdhis'). '.' .$attachment->getClientOriginalExtension();
         $attachment->move($dest,$getext);
         $data->attachment = $getext;
        }
        else
        {
-           $data->attachment - '0';
+           $data->attachment = '0';
        }
        
         $data->save();
 
-        return redirect()->route('admin/ticket'); 
+        return redirect()->back(); 
 
     }
 
@@ -132,21 +132,20 @@ class TicketController extends Controller
 
     {
         $data = SupportDetail::find($id);
-        $user_reply = DB::table('user_replies')->where('ticket_id', $id)->get();
         $admin_reply = DB::table('supports')->where('ticket_id', $id)->get();
-        return view('reply',compact('user_reply','admin_reply','data'));
+        return view('reply',compact('admin_reply','data'));
     }
 
     public function userReply(Request $request, $id)
     {
-        $data = New UserReply();
+        $data = New Support();
         $data->ticket_id = $id; 
-        $data->user_id = Auth::user()->id;
+        $data->role = 'Member';
         $data->message = $request->message;
 
        if($attachment = $request->file('attachment'))
        {
-        $dest = 'Attachment3';
+        $dest = 'Attachment';
         $getext = date('Ymdhis'). '.' .$attachment->getClientOriginalExtension();
         $attachment->move($dest,$getext);
         $data->attachment = $getext;
@@ -158,13 +157,14 @@ class TicketController extends Controller
        
         $data->save();
 
-        return redirect()->route('myticket'); 
+        return redirect()->back(); 
     }
 
     public function adminReply($id)
 
     {
         $data = SupportDetail::find($id);
-        return view('admin/reply',['data' => $data]);
+        $admin_reply = DB::table('supports')->where('ticket_id', $id)->get();
+        return view('admin/reply',['admin_reply' => $admin_reply, 'data' => $data]);
     }
 }
