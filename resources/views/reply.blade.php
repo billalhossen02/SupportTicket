@@ -13,12 +13,25 @@
     textarea.form-control 
     {
     height: auto;
-    width: 500px;
+    width: 700px;
     }
+
+    .left
+    {
+      margin-left:auto;
+    }
+
+    .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 0px;
+    margin-left: 0px;
+}
     </style>
 </head>
   <body style="margin-top: 30px; margin-left: 200px;">
-
 
     <main class="content">
       <div class="container p-0">
@@ -30,22 +43,47 @@
                 @foreach ($admin_reply as $item)
                 <div class="chat-message-left pb-4">
                   <div class="row">
-                    <div class="">
+                    
                       @if ($item->role == 'Admin')
-                      <img src="{{asset('avatar/avatar1.png')}}" class="rounded-circle mr-1" alt="Admin" width="40" height="40">
+
+                       <div class="col-md-6">
+                        <div class="row">
+                          <div class="">
+                            <img src="{{asset('avatar/avatar1.png')}}" class="rounded-circle mr-1" alt="Admin" width="40" height="40">
+                          </div>
+                          <div class="col-lg-8">
+                            <div class="text-muted small text-nowrap mt-2"><b><strong>{{$item->role}}</strong></b> {{$item->created_at}}</div>
+                            {{$item->message}}<br>
+                          </div>  
+                        </div>
+                        @if($item->attachment)
+                        <img src="{{asset('Attachment/'.$item->attachment)}}" style="height: 150px; width: 200px;">                       
+                        @endif
+                      </div>   
+
                       @else
-                      <img src="{{asset('avatar/avatar4.png')}}" class="rounded-circle mr-1" alt="User" width="40" height="40">
-                      @endif
-                    </div>
-                    <div class="col-lg-8">
-                    <div class="text-muted small text-nowrap mt-2"><b><strong>{{$item->role}}</strong></b> {{$item->created_at}}</div>
-                    {{$item->message}}<br>
-                    @if($item->attachment)
+
+                      <div class="col-md-6 left">
+                        <div class="row">
+                          <div class="col-lg-8">
+                            <div class="text-muted small text-nowrap mt-2"><b><strong>{{$item->role}}</strong></b> {{$item->created_at}}</div>
+                            {{$item->message}}<br>
+                          </div>
+                          <div class="">
+                            <img src="{{asset('avatar/avatar4.png')}}" class="rounded-circle mr-1" alt="Admin" width="40" height="40">
+                          </div>  
+                        </div>
+                        @if($item->attachment)
                         <img src="{{asset('Attachment/'.$item->attachment)}}" style="height: 150px; width: 200px;">
-                    @endif
-                    </div>
+                        @endif
+                       </div>                    
+                       
+                       @endif
+                    
+                   
                    </div> 
                   </div> 
+
                   @endforeach
   
                   <form action="{{url('user/reply/'.$data->id)}}" method="POST" enctype="multipart/form-data">
