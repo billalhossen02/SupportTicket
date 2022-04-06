@@ -20,6 +20,10 @@
             height: calc(2.25rem + 2px);
             width: 200px;
         }
+
+        label {
+          color:rgb(138, 24, 24)
+        }
     </style>
 
 

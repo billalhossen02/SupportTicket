@@ -28,9 +28,11 @@
     flex-wrap: wrap;
     margin-right: 0px;
     margin-left: 0px;
-}
+     }
     </style>
-</head>
+ </head>
+
+ 
   <body style="margin-top: 30px; margin-left: 200px;">
 
     <main class="content">
