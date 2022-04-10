@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::get('ticket',[TicketController::class, 'ticket'])->name('template');
 Route::post('ticket/store',[TicketController::class, 'storeData'])->name('store');
 Route::get('MyTicket',[TicketController::class, 'myTicket'])->name('myticket')->middleware('auth');
+Route::get('Reply/Blade/{id}', [TicketController::class, 'replyBlade']);
 Route::post('user/reply/{id}',[TicketController::class,'userReply']);
 
 
@@ -31,9 +32,8 @@ Route::get('admin/ticket', [TicketController::class, 'adminTicket'])->name('admi
 Route::get('edit/ticket/{id}',[TicketController::class, 'editTicket']);
 Route::post('update/ticket/{id}',[TicketController::class, 'updateTicket']);
 Route::get('delete/{id}',[TicketController::class, 'deleteTicket']);
-Route::post('reply/{id}',[TicketController::class,'reply']);
-Route::get('Reply/Blade/{id}', [TicketController::class, 'replyBlade']);
 Route::get('admin/reply/{id}',[TicketController::class, 'adminReply']);
+Route::post('reply/{id}',[TicketController::class,'reply']);
 
 
 
