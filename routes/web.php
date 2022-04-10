@@ -20,13 +20,14 @@ Route::get('/', function () {
 
 Route::get('ticket',[TicketController::class, 'ticket'])->name('template');
 Route::post('ticket/store',[TicketController::class, 'storeData'])->name('store');
-Route::get('MyTicket',[TicketController::class, 'myTicket'])->name('myticket');
+Route::get('MyTicket',[TicketController::class, 'myTicket'])->name('myticket')->middleware('auth');
 Route::post('user/reply/{id}',[TicketController::class,'userReply']);
+
 
 
 //Admin
 
-Route::get('admin/ticket', [TicketController::class, 'adminTicket'])->name('admin/ticket');
+Route::get('admin/ticket', [TicketController::class, 'adminTicket'])->name('admin/ticket')->middleware('is_admin');
 Route::get('edit/ticket/{id}',[TicketController::class, 'editTicket']);
 Route::post('update/ticket/{id}',[TicketController::class, 'updateTicket']);
 Route::get('delete/{id}',[TicketController::class, 'deleteTicket']);

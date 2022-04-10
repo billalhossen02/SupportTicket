@@ -5,11 +5,13 @@ Use Illuminate\Support\Facades\Auth;
 use App\Models\Support;
 use App\Models\SupportDetail;
 use App\Models\UserReply;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
+
     public function ticket()
     
     {
@@ -107,7 +109,7 @@ class TicketController extends Controller
 
         $data = New Support();
         $data->ticket_id = $id;
-        $data->role = 'Admin';
+        $data->role = Auth::user()->role;
         $data->message = $request->message;
 
        if($attachment = $request->file('attachment'))
@@ -140,7 +142,7 @@ class TicketController extends Controller
     {
         $data = New Support();
         $data->ticket_id = $id; 
-        $data->role = 'Member';
+        $data->role = Auth::user()->role;
         $data->message = $request->message;
 
        if($attachment = $request->file('attachment'))
