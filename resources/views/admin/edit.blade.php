@@ -9,25 +9,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Edit Ticket</title>
     <style>
-      .design 
-        {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            margin-top: 80px;
-        }
-        select.form-control:not([size]):not([multiple]) {
-            height: calc(2.25rem + 2px);
-            width: 200px;
-        }
+                body {                                      
+                      font-family: 'Times New Roman', serif;
+                      }
+                .design 
+                  {
+                      max-width: 1200px;
+                      width: 100%;
+                      margin: 0 auto;
+                      margin-top: 80px;
+                  }
+                  select.form-control:not([size]):not([multiple]) {
+                      height: calc(2.25rem + 2px);
+                      width: 200px;
+                  }
 
-        label {
-          color:rgb(138, 24, 24)
-        }
+                  label {
+                    color:rgb(138, 24, 24)
+                  }
     </style>
 
 
-  </head>
+</head>
 
 
  <body>

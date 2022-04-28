@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSupportsTable extends Migration
+class CreateRatingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,14 @@ class CreateSupportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('supports', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('ticket_id')->nullable();
             $table->foreign('ticket_id')->references('id')->on('support_details')->onDelete('cascade');
-            $table->string('role')->nullable();
-            $table->string('message')->nullable();
-            $table->string('attachment')->nullable();
+            $table->string('comment');
+            $table->integer('value');
             $table->timestamps();
         });
-
-
-
-       
     }
 
     /**
@@ -35,6 +30,6 @@ class CreateSupportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supports');
+        Schema::dropIfExists('ratings');
     }
 }

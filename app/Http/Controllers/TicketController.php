@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 Use Illuminate\Support\Facades\Auth;
 use App\Models\Support;
 use App\Models\SupportDetail;
+use App\Models\Image;
+use App\Models\Rating;
 use App\Models\UserReply;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class TicketController extends Controller
 {
@@ -30,21 +33,27 @@ class TicketController extends Controller
         $data->priority = $request->priority;
         $data->message = $request->message;
 
-      if($attachment = $request->file('attachment'))
-      {
-        $dest = 'Attachment';
-        $getext = date('Ymdhis'). '.' .$attachment->getClientOriginalExtension();
-        $attachment->move($dest, $getext);
-        $data->attachment = $getext;
-      }
-     else
+      
+       if($attachment = $request->file('attachment'))
+
+            {
+
+                $dest = 'Support/'.date('Ymd');
+                $getext = date('Ymdhis'). '.' .$attachment->getClientOriginalExtension();
+                $attachment->storeAs($dest, $getext);
+                $data->attachment = $getext;
+                        
+            }
+
+      else
+     
         {
             $data->attachment = '0';
         }
         
         $data->save();
         
-        return redirect()->route('myticket');
+        return redirect()->route('myticket')->with('success','Ticket created successfully.');
 
     }
 
@@ -106,27 +115,42 @@ class TicketController extends Controller
 
     public function reply(Request $request, $id)
     {
+        
+         if ($attachment = $request->file('attachment')){
+            
+            foreach($attachment as $image){
 
-        $data = New Support();
-        $data->ticket_id = $id;
-        $data->role = Auth::user()->role;
-        $data->message = $request->message;
+            $dest = 'Support/'.date('Ymd');
+            $getext = hexdec(uniqid()). '.' .$image->getClientOriginalExtension();
+            $image->storeAs($dest,$getext);
+            $image_path = $dest.'/'.$getext;
 
-       if($attachment = $request->file('attachment'))
-       {
-        $dest = 'Attachment';
-        $getext = date('Ymdhis'). '.' .$attachment->getClientOriginalExtension();
-        $attachment->move($dest,$getext);
-        $data->attachment = $getext;
-       }
-       else
-       {
-           $data->attachment = '0';
-       }
-       
-        $data->save();
+            Support::insert([
+                'ticket_id' => $id,
+                'attachment' => $image_path,
+                'role' => Auth::user()->role,
+                'message' => $request->message,
+                'attachment' => $image_path,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
 
-        return redirect()->back(); 
+            }
+        }
+
+        else
+        
+        {
+            Support::insert([
+            'ticket_id' => $id,
+            'role' => Auth::user()->role,
+            'message' => $request->message,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            ]);
+        }
+
+            return redirect()->back(); 
 
     }
 
@@ -134,39 +158,80 @@ class TicketController extends Controller
 
     {
         $data = SupportDetail::find($id);
+        $rating = DB::table('ratings')->where('ticket_id', $id)->first();
         $admin_reply = DB::table('supports')->where('ticket_id', $id)->get();
-        return view('reply',compact('admin_reply','data'));
+        return view('reply',compact('admin_reply','data','rating'));
     }
 
     public function userReply(Request $request, $id)
     {
-        $data = New Support();
-        $data->ticket_id = $id; 
-        $data->role = Auth::user()->role;
-        $data->message = $request->message;
 
-       if($attachment = $request->file('attachment'))
-       {
-        $dest = 'Attachment';
-        $getext = date('Ymdhis'). '.' .$attachment->getClientOriginalExtension();
-        $attachment->move($dest,$getext);
-        $data->attachment = $getext;
-       }
-       else
-       {
-        $data->attachment = '0'; 
-       }
+        if ($attachment = $request->file('attachment')){
        
-        $data->save();
+           foreach($attachment as $image){
+
+        $dest = 'Support/'.date('Ymd');
+        $getext = hexdec(uniqid()). '.' .$image->getClientOriginalExtension();
+        $image->storeAs($dest,$getext);
+        $image_path = $dest.'/'.$getext;
+
+    
+
+        Support::insert([
+            'ticket_id' => $id,
+            'attachment' => $image_path,
+            'role' => Auth::user()->role,
+            'message' => $request->message,
+            'attachment' => $image_path,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'attachment_types' => 'Group',
+        ]);
+
+       }
+    }
+    else
+        
+    {
+        Support::insert([
+            'ticket_id' => $id,
+            'role' => Auth::user()->role,
+            'message' => $request->message,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+    }
 
         return redirect()->back(); 
+
     }
 
     public function adminReply($id)
 
     {
         $data = SupportDetail::find($id);
+        $rating = DB::table('ratings')->where('ticket_id', $id)->first();
         $admin_reply = DB::table('supports')->where('ticket_id', $id)->get();
-        return view('admin/reply',['admin_reply' => $admin_reply, 'data' => $data]);
+        return view('admin/reply',['admin_reply' => $admin_reply, 'data' => $data, 'rating' => $rating]);
+    }
+
+    public function show($id)
+    {
+        $file = Support::find($id);
+        return view('show',['file' => $file]);
+
+    }
+
+    public function rating(Request $request,$id)
+    {
+        $data = new Rating();
+        $data->ticket_id = $id;
+        $data->comment = $request->comment;
+        $data->value = $request->rating;
+        $data->save();
+
+        return redirect()->back();
+
+
     }
 }

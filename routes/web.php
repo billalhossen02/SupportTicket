@@ -23,15 +23,16 @@ Route::post('ticket/store',[TicketController::class, 'storeData'])->name('store'
 Route::get('MyTicket',[TicketController::class, 'myTicket'])->name('myticket')->middleware('auth');
 Route::get('Reply/Blade/{id}', [TicketController::class, 'replyBlade']);
 Route::post('user/reply/{id}',[TicketController::class,'userReply']);
-
+Route::get('show/{id}',[TicketController::class, 'show']);
+Route::post('rating/{id}',[TicketController::class, 'rating']);
 
 
 //Admin
 
-Route::get('admin/ticket', [TicketController::class, 'adminTicket'])->name('admin/ticket')->middleware('is_admin');
+Route::get('admin/ticket', [TicketController::class, 'adminTicket'])->name('admin/ticket')->middleware('auth','is_admin');
 Route::get('edit/ticket/{id}',[TicketController::class, 'editTicket']);
 Route::post('update/ticket/{id}',[TicketController::class, 'updateTicket']);
-Route::get('delete/{id}',[TicketController::class, 'deleteTicket']);
+Route::delete('delete/{id}',[TicketController::class, 'deleteTicket'])->name('delete');
 Route::get('admin/reply/{id}',[TicketController::class, 'adminReply']);
 Route::post('reply/{id}',[TicketController::class,'reply']);
 
