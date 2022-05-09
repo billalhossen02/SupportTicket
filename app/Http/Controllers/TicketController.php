@@ -185,7 +185,7 @@ class TicketController extends Controller
             'attachment' => $image_path,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'attachment_types' => 'Group',
+            'attachment_type' => 'Group',
         ]);
 
        }

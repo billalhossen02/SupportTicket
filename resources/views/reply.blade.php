@@ -70,8 +70,7 @@
     </style>
 
  </head>
-
- 
+  
   <body style="margin-top: 30px; margin-left: 200px;">
 
     
@@ -103,9 +102,11 @@
 
                         <a href="{{url('show/'.$item->id)}}">
                           <img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px; margin-left:70px;">
-                        </a>   
+                        </a> 
+
                         @endif
-                       </div>   
+                       
+                      </div>   
 
                       @else
 
@@ -125,11 +126,13 @@
                         $extension = pathinfo($file_name, PATHINFO_EXTENSION);
                         // echo $extension;
                         @endphp
-
-                      @if($extension == 'jpg' || $extension == 'png' )
                       
+                      @if($extension == 'jpg' || $extension == 'png')
+                      
+                      <div class="">
                         <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px;"></a> 
-                          
+                      </div>    
+                     
                       @elseif ($extension == 'txt')
                         
                        <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment.{{$extension}}</a>
