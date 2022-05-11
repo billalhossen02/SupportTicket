@@ -23,7 +23,7 @@ Route::post('ticket/store',[TicketController::class, 'storeData'])->name('store'
 Route::get('MyTicket',[TicketController::class, 'myTicket'])->name('myticket')->middleware('auth');
 Route::get('Reply/Blade/{id}', [TicketController::class, 'replyBlade']);
 Route::post('user/reply/{id}',[TicketController::class,'userReply']);
-Route::get('show/{id}',[TicketController::class, 'show']);
+Route::get('show/',[TicketController::class, 'show']);
 Route::post('rating/{id}',[TicketController::class, 'rating']);
 
 

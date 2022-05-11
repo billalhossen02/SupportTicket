@@ -4,8 +4,8 @@
     {
 
     border:none;
-    width:1200px;
-    height: 1200px;
+    width:100vh;
+    height: 100vh;
     display:block;
 
     }
@@ -15,8 +15,10 @@
 
 <table class="table table-light">
     <tbody>
+
         <tr>
-            <td><iframe src="{{asset('storage/'.$file->attachment)}}"></iframe></td>
+            <td><iframe src="{{asset('storage/'.$image)}}"></iframe></td>
         </tr>
+
     </tbody>
 </table>

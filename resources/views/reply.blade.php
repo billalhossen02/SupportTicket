@@ -13,11 +13,11 @@
     <link rel="stylesheet" href="app.css">
     <title>Ticket Reply</title>
     <style>
-        body  {                                            
+        body  {
               font-family: 'Times New Roman', serif;
               }
 
-          textarea.form-control 
+          textarea.form-control
           {
           height: auto;
           width: 700px;
@@ -48,7 +48,7 @@
 
           }
 
-                
+
             .animated {
               -webkit-transition: height 0.2s;
               -moz-transition: height 0.2s;
@@ -70,21 +70,21 @@
     </style>
 
  </head>
-  
+
   <body style="margin-top: 30px; margin-left: 200px;">
 
-    
+
     <main class="content">
       <div class="container p-0">
         <h1 class="h3 mb-3">Ticket No #{{$data->id}}</h1><hr>
           <div class="col-12 col-lg-7 col-xl-9">
             <div class="position-relative">
               <div class="chat-messages p-6">
-               
+
                 @foreach ($admin_reply as $item)
                 <div class="chat-message-left pb-4">
                   <div class="row">
-                    
+
                       @if ($item->role == 'Admin')
 
                        <div class="col-md-6">
@@ -95,18 +95,18 @@
                           <div class="col-lg-8">
                           <div class="text-muted small text-nowrap mt-2"><b><strong>{{$item->role}}</strong></b> {{$item->created_at}}</div>
                             {{$item->message}}<br>
-                          </div>  
+                          </div>
                         </div>
-                        
+
                         @if($item->attachment)
 
                         <a href="{{url('show/'.$item->id)}}">
                           <img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px; margin-left:70px;">
-                        </a> 
+                        </a>
 
                         @endif
-                       
-                      </div>   
+
+                      </div>
 
                       @else
 
@@ -118,39 +118,46 @@
                           </div>
                           <div class="">
                             <img src="{{asset('avatar/avatar4.png')}}" class="rounded-circle mr-1" alt="Member" width="40" height="40" style="margin-right: 20px;">
-                          </div>  
+                          </div>
                         </div>
 
-                        @php   
+                        @php
+
+                        $i = 1;
                         $file_name = $item->attachment;
                         $extension = pathinfo($file_name, PATHINFO_EXTENSION);
                         // echo $extension;
+
                         @endphp
-                      
+
                       @if($extension == 'jpg' || $extension == 'png')
-                      
-                      <div class="">
-                        <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px;"></a> 
-                      </div>    
-                     
+
+                      @foreach(explode('|',$item->attachment) as $image)
+                      <div class="row">
+                          {{-- @dd($image); --}}
+                        <a style="margin-left: 15px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}.{{$extension}}</a>
+                        {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
+                      </div>
+                      @endforeach
+
                       @elseif ($extension == 'txt')
-                        
-                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment.{{$extension}}</a>
-                       
+
+                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
+
                        @elseif ($extension == 'pdf')
 
-                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment.{{$extension}}</a>
-                       
+                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
+
                        @endif
 
-                       </div>                    
-                       
+                       </div>
+
                        @endif
-                   </div> 
-                  </div> 
+                   </div>
+                  </div>
 
                   @endforeach
-  
+
                   @if($data->status !== 'Closed')
 
                       <form class="form-left" action="{{url('user/reply/'.$data->id)}}" method="POST" enctype="multipart/form-data">
@@ -159,16 +166,16 @@
                               <label for="exampleFormControlTextarea4">Reply</label>
                               <textarea name="message" class="form-control" id="exampleFormControlTextarea4" rows="1" placeholder="Message"></textarea>
                             </div>
-                
+
                             <div class="form-group">
                               <label for="exampleFormControlFile1">Attachments</label><br>
-                              <input type="file" accept=".jpg,.png,.pdf,.txt" name="attachment[]"  multiple>          
-                            </div> 
-                
+                              <input type="file" accept=".jpg,.png,.pdf,.txt" name="attachment[]"  multiple>
+                            </div>
+
                             <button type="submit" class="btn btn-success">Send</button>
                       </form>
 
-               
+
                   @else
 
 
@@ -181,7 +188,7 @@
                                   <div class="text-right">
                                       <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">See Review</a>
                                   </div>
-                              
+
                                       <div class="row" id="post-review-box" style="display:none;">
                                           <div class="col-md-6">
                                                 <td>{{$rating->comment}}</td>
@@ -192,13 +199,13 @@
                                                     </div>
                                           </div>
                                       </div>
-                            </div>  
+                            </div>
                           </div>
                         </div>
                       </div>
 
                      @else
-                     
+
                      <div class="container">
                       <div class="row" style="margin-top:40px;">
                         <div class="col-md-6">
@@ -206,14 +213,14 @@
                                 <div class="text-right">
                                     <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
                                 </div>
-                            
+
                                 <div class="row" id="post-review-box" style="display:none;">
                                     <div class="col-md-12">
                                         <form accept-charset="UTF-8" action="{{url('rating/'.$data->id)}}" method="post">
                                           @csrf
-                                            <input id="ratings-hidden" name="rating" type="hidden"> 
+                                            <input id="ratings-hidden" name="rating" type="hidden">
                                             <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
-                            
+
                                             <div class="text-right">
                                                 <div class="stars starrr" data-rating="0"></div>
                                                 <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
@@ -223,7 +230,7 @@
                                         </form>
                                     </div>
                                 </div>
-                          </div> 
+                          </div>
                         </div>
                       </div>
                     </div>

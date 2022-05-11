@@ -13,11 +13,11 @@
     <link rel="stylesheet" href="app.css">
     <title>Ticket Reply</title>
     <style>
-        body  {                                            
+        body  {
               font-family: 'Times New Roman', serif;
               }
 
-          textarea.form-control 
+          textarea.form-control
           {
           height: auto;
           width: 700px;
@@ -48,7 +48,7 @@
 
           }
 
-                
+
             .animated {
               -webkit-transition: height 0.2s;
               -moz-transition: height 0.2s;
@@ -71,21 +71,21 @@
 
  </head>
 
- 
+
   <body style="margin-top: 30px; margin-left: 200px;">
 
-    
+
     <main class="content">
       <div class="container p-0">
         <h1 class="h3 mb-3">Ticket No #{{$data->id}}</h1><hr>
           <div class="col-12 col-lg-7 col-xl-9">
             <div class="position-relative">
               <div class="chat-messages p-6">
-               
+
                 @foreach ($admin_reply as $item)
                 <div class="chat-message-left pb-4">
                   <div class="row">
-                    
+
                       @if ($item->role == 'Admin')
 
                        <div class="col-md-6">
@@ -96,17 +96,16 @@
                           <div class="col-lg-8">
                           <div class="text-muted small text-nowrap mt-2"><b><strong>{{$item->role}}</strong></b> {{$item->created_at}}</div>
                             {{$item->message}}<br>
-                          </div>  
+                          </div>
                         </div>
-                        
+
                         @if($item->attachment)
 
                         <a href="{{url('show/'.$item->id)}}">
                           <img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px; margin-left:70px;">
-                        </a>   
+                        </a>
                         @endif
-                       </div>   
-
+                       </div>
                       @else
 
                       <div class="col-md-6 left">
@@ -117,37 +116,38 @@
                           </div>
                           <div class="">
                             <img src="{{asset('avatar/avatar4.png')}}" class="rounded-circle mr-1" alt="Member" width="40" height="40" style="margin-right: 20px;">
-                          </div>  
+                          </div>
                         </div>
 
-                        @php   
+                        @php
                         $file_name = $item->attachment;
                         $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+
                         // echo $extension;
                         @endphp
 
                       @if($extension == 'jpg' || $extension == 'png' )
-                      
-                        <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px;"></a> 
-                          
+
+                        <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px;"></a>
+
                       @elseif ($extension == 'txt')
-                        
+
                        <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment.{{$extension}}</a>
-                       
+
                        @elseif ($extension == 'pdf')
 
                        <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment.{{$extension}}</a>
-                       
+
                        @endif
 
-                       </div>                    
-                       
+                       </div>
+
                        @endif
-                   </div> 
-                  </div> 
+                   </div>
+                  </div>
 
                   @endforeach
-  
+
                   @if($data->status !== 'Closed')
 
                       <form class="form-left" action="{{url('user/reply/'.$data->id)}}" method="POST" enctype="multipart/form-data">
@@ -156,16 +156,16 @@
                               <label for="exampleFormControlTextarea4">Reply</label>
                               <textarea name="message" class="form-control" id="exampleFormControlTextarea4" rows="1" placeholder="Message"></textarea>
                             </div>
-                
+
                             <div class="form-group">
                               <label for="exampleFormControlFile1">Attachments</label><br>
-                              <input type="file" accept=".jpg,.png,.pdf,.txt" name="attachment[]"  multiple>          
-                            </div> 
-                
+                              <input type="file" accept=".jpg,.png,.pdf,.txt" name="attachment[]"  multiple>
+                            </div>
+
                             <button type="submit" class="btn btn-success">Send</button>
                       </form>
 
-               
+
                   @else
 
 
@@ -178,7 +178,7 @@
                                   <div class="text-right">
                                       <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">See Review</a>
                                   </div>
-                              
+
                                       <div class="row" id="post-review-box" style="display:none;">
                                           <div class="col-md-6">
                                                 <td>{{$rating->comment}}</td>
@@ -189,11 +189,11 @@
                                                     </div>
                                           </div>
                                       </div>
-                            </div>  
+                            </div>
                           </div>
                         </div>
-                      </div>                        
-                      
+                      </div>
+
               @endif
             @endif
           </div>

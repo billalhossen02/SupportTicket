@@ -33,17 +33,17 @@
                        <td>{{$item->department}}</td>
                         <td>{{$item->subject}}</td>
                         @if ($item->status == 'Open')
-                        
+
                         <td><span class="badge badge-info">{{$item->status}}</span></td>
-                        
+
                         @elseif ($item->status == 'Closed')
-                        
+
                           <td><span class="badge badge-danger">{{$item->status}}</span></td>
-                        
+
                         @elseif ($item->status == 'Answered' )
-                        
+
                           <td><span class="badge badge-warning">{{$item->status}}</span></td>
-                        
+
                         @endif
                         <td>{{$item->updated_at}}</td>
                         <td>
@@ -56,12 +56,12 @@
             </table>
            <div class="pagi"> {{$data->links()}} </div>
           </div>
-        </div> --}} 
+        </div> --}}
 
 
-<div class="container mb-4 main-container">
+<div class="mb-4">
     <div class="row">
-        <div class="col-lg-4 pb-5">
+        <div class="col-lg-2 pb-5">
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
                 <div class="author-card-cover" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHRzlh8gzTFZAokgbIGOMfF03oQ7JkawWe0A&usqp=CAUhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHRzlh8gzTFZAokgbIGOMfF03oQ7JkawWe0A&usqp=CAU);"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
@@ -100,7 +100,7 @@
             </div>
         </div>
         <!-- Orders Table-->
-        <div class="col-lg-8 pb-5">
+        <div class="col-lg-6 pb-5">
             <div class="table-responsive">
                 <table class="table table-hover mb-0">
                     @if ($message = Session::get('success'))
@@ -122,26 +122,26 @@
                             <td><a href="{{url('Reply/Blade/'.$item->id)}}">{{$item->department}}</a></td>
                             <td>{{$item->subject}}</td>
                             @if ($item->status == 'Open')
-                            
+
                             <td><span class="badge badge-info">{{$item->status}}</span></td>
-                            
+
                             @elseif ($item->status == 'Closed')
-                            
+
                               <td><span class="badge badge-danger">{{$item->status}}</span></td>
-                            
+
                             @elseif ($item->status == 'Answered' )
-                            
+
                               <td><span class="badge badge-warning">{{$item->status}}</span></td>
-                            
+
                             @endif
                             <td>{{$item->updated_at}}</td>
                             {{-- <td>
                               <a href="{{url('Reply/Blade/'.$item->id)}}"><button class="btn btn-secondary"><span class="las la-eye"></span></button></a>
-                              <a href="{{url('delete/'.$item->id)}}"><button class="btn btn-danger"><i class="la la-trash"></i></button></a>  
+                              <a href="{{url('delete/'.$item->id)}}"><button class="btn btn-danger"><i class="la la-trash"></i></button></a>
                             </td> --}}
                         </tr>
                         @endforeach
-                    
+
                     </tbody>
                 </table>
                 <div> {{$data->links()}} </div>
@@ -149,6 +149,6 @@
         </div>
     </div>
 </div>
-        
-        
+
+
 </html>

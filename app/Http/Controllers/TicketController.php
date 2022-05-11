@@ -16,7 +16,7 @@ class TicketController extends Controller
 {
 
     public function ticket()
-    
+
     {
         return view('openticket');
     }
@@ -33,7 +33,7 @@ class TicketController extends Controller
         $data->priority = $request->priority;
         $data->message = $request->message;
 
-      
+
        if($attachment = $request->file('attachment'))
 
             {
@@ -42,17 +42,17 @@ class TicketController extends Controller
                 $getext = date('Ymdhis'). '.' .$attachment->getClientOriginalExtension();
                 $attachment->storeAs($dest, $getext);
                 $data->attachment = $getext;
-                        
+
             }
 
       else
-     
+
         {
             $data->attachment = '0';
         }
-        
+
         $data->save();
-        
+
         return redirect()->route('myticket')->with('success','Ticket created successfully.');
 
     }
@@ -83,12 +83,12 @@ class TicketController extends Controller
     public function updateTicket(Request $request, $id )
 
     {
-       
+
         // $attachment = $request->file('attachment');
         // $dest = 'Attachment';
         // $getext = date('Ymdhis'). '.' .$attachment->getClientOriginalExtension();
         // $attachment->move($dest, $getext);
-        
+
         SupportDetail::find($id)->update([
 
             // 'user_name' => $request->name,
@@ -115,9 +115,9 @@ class TicketController extends Controller
 
     public function reply(Request $request, $id)
     {
-        
+
          if ($attachment = $request->file('attachment')){
-            
+
             foreach($attachment as $image){
 
             $dest = 'Support/'.date('Ymd');
@@ -127,10 +127,9 @@ class TicketController extends Controller
 
             Support::insert([
                 'ticket_id' => $id,
-                'attachment' => $image_path,
                 'role' => Auth::user()->role,
                 'message' => $request->message,
-                'attachment' => $image_path,
+                'attachment' => implode ("|" ,$image_path),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);
@@ -139,7 +138,7 @@ class TicketController extends Controller
         }
 
         else
-        
+
         {
             Support::insert([
             'ticket_id' => $id,
@@ -150,7 +149,7 @@ class TicketController extends Controller
             ]);
         }
 
-            return redirect()->back(); 
+            return redirect()->back();
 
     }
 
@@ -165,33 +164,31 @@ class TicketController extends Controller
 
     public function userReply(Request $request, $id)
     {
+        $image_path =array();
 
         if ($attachment = $request->file('attachment')){
-       
+
            foreach($attachment as $image){
 
         $dest = 'Support/'.date('Ymd');
         $getext = hexdec(uniqid()). '.' .$image->getClientOriginalExtension();
         $image->storeAs($dest,$getext);
-        $image_path = $dest.'/'.$getext;
+        $image_path[] = $dest.'/'.$getext;
 
-    
+
+       }
 
         Support::insert([
             'ticket_id' => $id,
-            'attachment' => $image_path,
+            'attachment' => implode ("|" ,$image_path),
             'role' => Auth::user()->role,
             'message' => $request->message,
-            'attachment' => $image_path,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'attachment_type' => 'Group',
         ]);
-
-       }
     }
     else
-        
+
     {
         Support::insert([
             'ticket_id' => $id,
@@ -202,7 +199,7 @@ class TicketController extends Controller
         ]);
     }
 
-        return redirect()->back(); 
+        return redirect()->back();
 
     }
 
@@ -215,10 +212,9 @@ class TicketController extends Controller
         return view('admin/reply',['admin_reply' => $admin_reply, 'data' => $data, 'rating' => $rating]);
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $file = Support::find($id);
-        return view('show',['file' => $file]);
+        return view('show', ['image'=> $request->image]);
 
     }
 

@@ -7,25 +7,17 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css" integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Open Ticket</title>
-    <style>
-      .btn:not(:disabled):not(.disabled) {
-                                            cursor: pointer;
-                                            margin-left: 12px;
-                                          }
-                                          body {
-                                                  
-                                                  font-family: 'Times New Roman', serif;
-                                              }
-    </style>
+
 </head>
 
-<body>
 
-  <div class="container mb-4 main-container">
+<body style="font-family: 'Times New Roman', serif;">
+
+  <div class="mb-4">
     <div class="row">
-        <div class="col-lg-4 pb-5"> 
+        <div class="col-md-2 pb-5">
             <!-- Account Sidebar-->
             <div class="author-card pb-3">
                 <div class="author-card-cover" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHRzlh8gzTFZAokgbIGOMfF03oQ7JkawWe0A&usqp=CAUhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHRzlh8gzTFZAokgbIGOMfF03oQ7JkawWe0A&usqp=CAU);"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
@@ -64,9 +56,9 @@
             </div>
         </div>
         <!-- Orders Table-->
-        <div class="col-lg-8 pb-5">
+        <div class="col-md-4 pb-5 main-container">
           <div class="container design">
-            <div class="col-md-8">
+            <div class="">
                 <h3 class="header">OPEN TICKET</h3>
                 <hr>
           <form action="{{route('store')}}" method="POST" enctype="multipart/form-data">
@@ -82,10 +74,10 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="subject">Subject</label>
+                <label for="subject" >Subject</label>
                 <input name="subject" type="text" class="form-control" id="inputAddress" placeholder="Subject" required>
               </div>
-             
+
               <div class="form-row">
                   <div class="form-group col-md-6">
                       <label for="inputState">Department</label>
@@ -96,8 +88,8 @@
                         <option>General Enquiries </option>
                       </select>
                     </div>
-      
-               
+
+
                 <div class="form-group col-md-6">
                   <label for="inputState">Priority</label>
                   <select name='priority' class="form-control" required>
@@ -107,26 +99,26 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group purple-border">
+              <div class="form-group">
                   <label for="exampleFormControlTextarea4">Message</label>
                   <textarea name="message" class="form-control" id="exampleFormControlTextarea4" rows="5" required></textarea>
               </div>
-      
+
               <div class="form-group">
                   <label for="exampleFormControlFile1">Attachments</label><br>
-                  <input type="file" accept=".jpg,.png,.pdf,.txt" name="filenames[]" id="exampleFormControlFile1" multiple>                        </div> 
+                  <input type="file" accept=".jpg,.png,.pdf,.txt" name="filenames[]" id="exampleFormControlFile1" multiple>                        </div>
                 </div>
-      
+
               <a href="{{route('myticket')}}"><button type="button" class="btn btn-danger">Cancel</button></a>
               <button type="submit" class="btn btn-success">Submit</button>
             </form>
-          </div>  
+          </div>
         </div>
         </div>
     </div>
 </div>
 
- 
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
