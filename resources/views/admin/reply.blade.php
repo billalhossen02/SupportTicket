@@ -101,9 +101,39 @@
 
                         @if($item->attachment)
 
-                        <a href="{{url('show/'.$item->id)}}">
+                        {{-- <a href="{{url('show/'.$item->id)}}">
                           <img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px; margin-left:70px;">
-                        </a>
+                        </a> --}}
+
+                        @php
+
+                        $i = 1;
+                        $file_name = $item->attachment;
+                        $extension = pathinfo($file_name, PATHINFO_EXTENSION);
+                        // echo $extension;
+
+                        @endphp
+
+                      @if($extension == 'jpg' || $extension == 'png')
+
+                      @foreach(explode('|',$item->attachment) as $image)
+                      <div class="row">
+                          {{-- @dd($image); --}}
+                        <a style="margin-left: 70px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}.{{$extension}}</a>
+                        {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
+                      </div>
+                      @endforeach
+
+                      @elseif ($extension == 'txt')
+
+                       <a style="margin-left: 70px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
+
+                       @elseif ($extension == 'pdf')
+
+                       <a style="margin-left: 70px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
+
+                       @endif
+
                         @endif
                        </div>
                       @else
@@ -120,23 +150,31 @@
                         </div>
 
                         @php
+
+                        $i = 1;
                         $file_name = $item->attachment;
                         $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-
                         // echo $extension;
+
                         @endphp
 
-                      @if($extension == 'jpg' || $extension == 'png' )
+                      @if($extension == 'jpg' || $extension == 'png')
 
-                        <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px;"></a>
+                      @foreach(explode('|',$item->attachment) as $image)
+                      <div class="row">
+                          {{-- @dd($image); --}}
+                        <a style="margin-left: 15px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}.{{$extension}}</a>
+                        {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
+                      </div>
+                      @endforeach
 
                       @elseif ($extension == 'txt')
 
-                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment.{{$extension}}</a>
+                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
 
                        @elseif ($extension == 'pdf')
 
-                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment.{{$extension}}</a>
+                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
 
                        @endif
 
