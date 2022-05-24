@@ -113,25 +113,31 @@
 
                         @endphp
 
-                      @if($extension == 'jpg' || $extension == 'png')
+                            @if($extension == 'jpg' || $extension == 'png')
 
-                      @foreach(explode('|',$item->attachment) as $image)
-                      <div class="row">
-                          {{-- @dd($image); --}}
-                        <a style="margin-left: 70px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}.{{$extension}}</a>
-                        {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
-                      </div>
-                      @endforeach
+                            @foreach(explode('|',$item->attachment) as $image)
+                            <div class="row">
+                                {{-- @dd($image); --}}
+                              <a style="margin-left: 70px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}</a>
+                              {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
+                            </div>
+                            @endforeach
 
-                      @elseif ($extension == 'txt')
+                            @elseif ($extension == 'txt' || $extension == 'pdf')
 
-                       <a style="margin-left: 70px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
+                            @foreach(explode('|',$item->attachment) as $image)
+                            <div class="row">
+                                {{-- @dd($image); --}}
+                                <a style="margin-left: 70px" href="{{url('show/')}}?image={{$image}}"> Attachment{{$i++}}</a>
+                              {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
+                            </div>
+                            @endforeach
 
-                       @elseif ($extension == 'pdf')
+                            {{-- @elseif ($extension == 'pdf')
 
-                       <a style="margin-left: 70px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
+                            <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a> --}}
 
-                       @endif
+                            @endif
 
                         @endif
 
@@ -164,18 +170,24 @@
                       @foreach(explode('|',$item->attachment) as $image)
                       <div class="row">
                           {{-- @dd($image); --}}
-                        <a style="margin-left: 15px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}.{{$extension}}</a>
+                        <a style="margin-left: 15px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}</a>
                         {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
                       </div>
                       @endforeach
 
-                      @elseif ($extension == 'txt')
+                      @elseif ($extension == 'txt' || $extension == 'pdf')
 
-                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
+                      @foreach(explode('|',$item->attachment) as $image)
+                      <div class="row">
+                          {{-- @dd($image); --}}
+                          <a style="margin-left: 15px" href="{{url('show/')}}?image={{$image}}"> Attachment{{$i++}}</a>
+                        {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
+                      </div>
+                      @endforeach
 
-                       @elseif ($extension == 'pdf')
+                       {{-- @elseif ($extension == 'pdf')
 
-                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a>
+                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a> --}}
 
                        @endif
 

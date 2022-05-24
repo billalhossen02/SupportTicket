@@ -51,6 +51,8 @@
                 color: blanchedalmond;
               }
 
+        
+
             .float
               {
                 float:right;
@@ -78,7 +80,9 @@
               <table class="table">
                 <thead>
                 <tr>
-                    <th>Department</th>
+                    <th>Name</th> 
+                    <th>Email</th>
+                    <th>Support</th>
                     <th>Subject</th>
                     <th>Status</th>
                     <th>Last Updated</th>
@@ -88,6 +92,8 @@
                 <tbody>
                   @foreach ($data as $item)
                     <tr>
+                        <td>{{$item->user_name }}</td>
+                        <td>{{ $item->user_email }}</td>
                         <td>{{$item->department}}</td>
                         <td>{{$item->subject}}</td>
                         @if ($item->status == 'Open')

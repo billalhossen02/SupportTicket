@@ -57,7 +57,7 @@
             </div>
           
             <div class="form-group col-md-6">
-              <label for="subject">Department</label><br>
+              <label for="subject">Support</label><br>
                 <p>{{$data->department}}</p>
               </div>
             </div>

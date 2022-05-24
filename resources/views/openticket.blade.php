@@ -14,7 +14,6 @@
 
 
 <body style="font-family: 'Times New Roman', serif;">
-
   <div class="mb-4">
     <div class="row">
         <div class="col-md-2 pb-5">
@@ -66,11 +65,11 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="name">Name</label>
-                  <input name="name" type="text" class="form-control" id="inputEmail4" placeholder="Name" required>
+                  <input name="name" type="text" class="form-control" value="{{ $data->name }}" id="inputEmail4" placeholder={{ $data->name }} >
                 </div>
                 <div class="form-group col-md-6">
                   <label for="email">Email</label>
-                  <input name="email" type="email" class="form-control" id="inputPassword4" placeholder="Email" required>
+                  <input name="email" type="email" class="form-control" id="inputPassword4" value="{{ $data->email }}" placeholder={{ $data->email }}>
                 </div>
               </div>
               <div class="form-group">
@@ -80,12 +79,12 @@
 
               <div class="form-row">
                   <div class="form-group col-md-6">
-                      <label for="inputState">Department</label>
+                      <label for="inputState">Support</label>
                       <select name="department" class="form-control" required>
                         <option selected>Technical Support </option>
                         <option>Refund Support</option>
-                        <option>Sales and Billings</option>
-                        <option>General Enquiries </option>
+                        <option>Sales and Billings Support</option>
+                        <option>General Enquiries Support </option>
                       </select>
                     </div>
 
@@ -110,7 +109,7 @@
                 </div>
 
               <a href="{{route('myticket')}}"><button type="button" class="btn btn-danger">Cancel</button></a>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button type="submit" class="btn btn-success">Send</button>
             </form>
           </div>
         </div>

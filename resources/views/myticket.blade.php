@@ -110,7 +110,7 @@
                      @endif
                     <thead>
                         <tr>
-                          <th>Department #</th>
+                          <th>Support #</th>
                           <th>Subject</th>
                           <th>Status</th>
                           <th>Last Updated</th>

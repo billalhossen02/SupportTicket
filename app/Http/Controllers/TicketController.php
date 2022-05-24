@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 Use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Support;
 use App\Models\SupportDetail;
 use App\Models\Image;
@@ -18,7 +19,9 @@ class TicketController extends Controller
     public function ticket()
 
     {
-        return view('openticket');
+        $id = Auth::user()->id;
+        $data = User::find($id);
+        return view('openticket',compact('data'));
     }
 
     public function storeData(Request $request)
@@ -217,6 +220,7 @@ class TicketController extends Controller
         return view('show', ['image'=> $request->image]);
 
     }
+
 
     public function rating(Request $request,$id)
     {
