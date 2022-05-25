@@ -72,7 +72,7 @@ class TicketController extends Controller
     public function myTicket()
 
     {
-        $data = SupportDetail::where('user_id', Auth::user()->id)->latest()->paginate(5);
+        $data = SupportDetail::where('user_id', Auth::user()->id)->latest()->paginate(4);
         return view('myticket',['data' => $data]);
     }
 
@@ -86,21 +86,8 @@ class TicketController extends Controller
     public function updateTicket(Request $request, $id )
 
     {
-
-        // $attachment = $request->file('attachment');
-        // $dest = 'Attachment';
-        // $getext = date('Ymdhis'). '.' .$attachment->getClientOriginalExtension();
-        // $attachment->move($dest, $getext);
-
         SupportDetail::find($id)->update([
-
-            // 'user_name' => $request->name,
-            // 'user_email' => $request->email,
-            // 'subject' => $request->subject,
-            // 'department' => $request->department,
-            // 'priority' => $request->priority,
-            // 'message' => $request->message,
-            // 'attachment' => $getext,
+  
             'status' => $request->status
 
         ]);

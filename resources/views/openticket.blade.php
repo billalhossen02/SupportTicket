@@ -40,7 +40,7 @@
                     <a class="list-group-item" href="{{route('template')}}"  tagert="__blank">
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fa fa-plus mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Open New Ticket</div>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Create a Ticket</div>
                             </div>
                         </div>
                     </a>
@@ -79,7 +79,7 @@
 
               <div class="form-row">
                   <div class="form-group col-md-6">
-                      <label for="inputState">Support</label>
+                      <label for="inputState">Support Type</label>
                       <select name="department" class="form-control" required>
                         <option selected>Technical Support </option>
                         <option>Refund Support</option>

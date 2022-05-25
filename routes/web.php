@@ -49,11 +49,6 @@ Route::post('reply/{id}',[TicketController::class,'reply']);
 
 
 
-
-
-
-
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -13,52 +13,7 @@
 
 </head>
 <body>
-
-        {{-- <div class="container">
-            <div class="col-md-10">
-                <a href="{{route('template')}}"><button class="btn btn-success float">New Ticket</button></a>
-              <table class="table">
-                <thead>
-                <tr>
-                    <th>Department</th>
-                    <th>Subject</th>
-                    <th>Status</th>
-                    <th>Last Updated</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                  @foreach ($data as $item)
-                  <tr>
-                       <td>{{$item->department}}</td>
-                        <td>{{$item->subject}}</td>
-                        @if ($item->status == 'Open')
-
-                        <td><span class="badge badge-info">{{$item->status}}</span></td>
-
-                        @elseif ($item->status == 'Closed')
-
-                          <td><span class="badge badge-danger">{{$item->status}}</span></td>
-
-                        @elseif ($item->status == 'Answered' )
-
-                          <td><span class="badge badge-warning">{{$item->status}}</span></td>
-
-                        @endif
-                        <td>{{$item->updated_at}}</td>
-                        <td>
-                          <a href="{{url('Reply/Blade/'.$item->id)}}"><button class="btn btn-secondary"><span class="las la-eye"></span></button></a>
-                          {{-- <a href="{{url('delete/'.$item->id)}}"><button class="btn btn-danger"><i class="la la-trash"></i></button></a>   --}}
-                        {{-- </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-           <div class="pagi"> {{$data->links()}} </div>
-          </div>
-        </div> --}}
-
-
+    
 <div class="mb-4">
     <div class="row">
         <div class="col-lg-2 pb-5">
@@ -85,7 +40,7 @@
                     <a class="list-group-item" href="{{route('template')}}"  tagert="__blank">
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fa fa-plus mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Open New Ticket</div>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Create a Ticket</div>
                             </div>
                         </div>
                     </a>
@@ -113,14 +68,17 @@
                           <th>Support #</th>
                           <th>Subject</th>
                           <th>Status</th>
+                          <th>Message</th>
                           <th>Last Updated</th>
                         </tr>
                     </thead>
                     <tbody>
                       @foreach ($data as $item)
                       <tr>
-                            <td><a href="{{url('Reply/Blade/'.$item->id)}}">{{$item->department}}</a></td>
+                            <td>{{$item->department}}</td>
+
                             <td>{{$item->subject}}</td>
+                            
                             @if ($item->status == 'Open')
 
                             <td><span class="badge badge-info">{{$item->status}}</span></td>
@@ -134,11 +92,13 @@
                               <td><span class="badge badge-warning">{{$item->status}}</span></td>
 
                             @endif
-                            <td>{{$item->updated_at}}</td>
-                            {{-- <td>
-                              <a href="{{url('Reply/Blade/'.$item->id)}}"><button class="btn btn-secondary"><span class="las la-eye"></span></button></a>
-                              <a href="{{url('delete/'.$item->id)}}"><button class="btn btn-danger"><i class="la la-trash"></i></button></a>
-                            </td> --}}
+
+                            <td>
+                              <a href="{{url('Reply/Blade/'.$item->id)}}"> @include('svg.message')</a>
+                            </td>
+
+                            <td>{{$item->updated_at->format("j F, Y : g:i a")}}</td>
+
                         </tr>
                         @endforeach
 

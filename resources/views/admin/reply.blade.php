@@ -10,7 +10,6 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="app.css">
     <title>Ticket Reply</title>
     <style>
         body  {
@@ -74,7 +73,6 @@
 
   <body style="margin-top: 30px; margin-left: 200px;">
 
-
     <main class="content">
       <div class="container p-0">
         <h1 class="h3 mb-3">Ticket No #{{$data->id}}</h1><span style="color:rgb(138, 24, 24)">{{ $data->subject }}</span><hr>
@@ -101,26 +99,17 @@
 
                         @if($item->attachment)
 
-                        {{-- <a href="{{url('show/'.$item->id)}}">
-                          <img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px; margin-left:70px;">
-                        </a> --}}
-
                         @php
-
                         $i = 1;
                         $file_name = $item->attachment;
                         $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-                        // echo $extension;
-
                         @endphp
 
                               @if($extension == 'jpg' || $extension == 'png')
 
                               @foreach(explode('|',$item->attachment) as $image)
                               <div class="row">
-                                  {{-- @dd($image); --}}
                                 <a style="margin-left: 70px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}</a>
-                                {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
                               </div>
                               @endforeach
 
@@ -128,22 +117,16 @@
 
                               @foreach(explode('|',$item->attachment) as $image)
                               <div class="row">
-                                  {{-- @dd($image); --}}
                                   <a style="margin-left: 70px" href="{{url('show/')}}?image={{$image}}"> Attachment{{$i++}}</a>
-                                {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
                               </div>
-                              @endforeach
-
-                              {{-- @elseif ($extension == 'pdf')
-
-                              <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a> --}}
-
+                              @endforeach      
+                             
                               @endif
 
-                        @endif
+                              @endif
                        </div>
-                      @else
 
+                      @else
                       <div class="col-md-6 left">
                         <div class="row">
                           <div class="col-lg-8">
@@ -154,23 +137,18 @@
                             <img src="{{asset('avatar/avatar4.png')}}" class="rounded-circle mr-1" alt="Member" width="40" height="40" style="margin-right: 20px;">
                           </div>
                         </div>
-
+                        
                         @php
-
                         $i = 1;
                         $file_name = $item->attachment;
                         $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-                        // echo $extension;
-
                         @endphp
 
                       @if($extension == 'jpg' || $extension == 'png')
 
                       @foreach(explode('|',$item->attachment) as $image)
                       <div class="row">
-                          {{-- @dd($image); --}}
                         <a style="margin-left: 15px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}</a>
-                        {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
                       </div>
                       @endforeach
 
@@ -178,19 +156,14 @@
 
                       @foreach(explode('|',$item->attachment) as $image)
                       <div class="row">
-                          {{-- @dd($image); --}}
                           <a style="margin-left: 15px" href="{{url('show/')}}?image={{$image}}"> Attachment{{$i++}}</a>
-                        {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
                       </div>
                       @endforeach
 
-                       {{-- @elseif ($extension == 'pdf')
-
-                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a> --}}
-
                        @endif
-                       </div>
 
+                       </div>
+                       
                        @endif
                    </div>
                   </div>
@@ -203,22 +176,18 @@
                         @csrf
                             <div class="form-group purple-border">
                               <label for="exampleFormControlTextarea4">Reply</label>
-                              <textarea name="message" class="form-control" id="exampleFormControlTextarea4" rows="1" placeholder="Message"></textarea>
+                              <textarea name="message" class="form-control" id="exampleFormControlTextarea4" rows="2" placeholder="Message"></textarea>
                             </div>
-
                             <div class="form-group">
                               <label for="exampleFormControlFile1">Attachments</label><br>
                               <input type="file" accept=".jpg,.png,.pdf,.txt" name="attachment[]"  multiple>
                             </div>
-
                             <button type="submit" class="btn btn-success">Send</button>
                       </form>
 
-
                   @else
 
-
-                      @if($rating)
+                    @if($rating)
 
                       <div class="container">
                         <div class="row" style="margin-top:40px;">
@@ -227,7 +196,6 @@
                                   <div class="text-right">
                                       <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">See Review</a>
                                   </div>
-
                                       <div class="row" id="post-review-box" style="display:none;">
                                           <div class="col-md-6">
                                                 <td>{{$rating->comment}}</td>
@@ -235,9 +203,9 @@
                                                         <div class="stars starrrr" name="value" data-rating={{$rating->value}}></div>
                                                           <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
                                                         <span class="glyphicon glyphicon-remove"></span>Closed</a>
-                                                    </div>
                                           </div>
                                       </div>
+                                  </div>
                             </div>
                           </div>
                         </div>

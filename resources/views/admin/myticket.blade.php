@@ -96,27 +96,29 @@
                         <td>{{ $item->user_email }}</td>
                         <td>{{$item->department}}</td>
                         <td>{{$item->subject}}</td>
-                        @if ($item->status == 'Open')
                         
-                        <td><span class="badge badge-info">{{$item->status}}</span></td>
-                        
-                        @elseif ($item->status == 'Closed')
-                        
-                          <td><span class="badge badge-danger">{{$item->status}}</span></td>
-                        
+                        @if ($item->status == 'Open') 
+
+                        <td><span class="badge badge-info">{{$item->status}}</span></td>  
+
+                        @elseif ($item->status == 'Closed') 
+
+                         <td><span class="badge badge-danger">{{$item->status}}</span></td> 
+
                         @elseif ($item->status == 'Answered' )
-                        
+
                           <td><span class="badge badge-warning">{{$item->status}}</span></td>
-                        
+
                         @endif
-                        <td>{{$item->updated_at}}</td>
+
+                        <td>{{$item->updated_at->format("j F, Y : g:i a")}}</td>
                         <td class="td"> 
-                          <a href="{{url('admin/reply/'.$item->id)}}"><button class="btn btn-success">Reply</button></a>
-                            <a href="{{url('edit/ticket/'.$item->id)}}"><button class="btn btn-primary"><i class="la la-eye"></i></button></a>
+                          <a href="{{url('admin/reply/'.$item->id)}}"><button class="btn btn-sm btn-secondary"> @include('svg.message')</button></a>
+                            <a href="{{url('edit/ticket/'.$item->id)}}"><button class="btn btn-primary" data-toggle="tooltip" title="Show Ticket"><i class="la la-eye" "></i></button></a>
                            <form method="POST" action="{{ route('delete', $item->id) }}">
                             @csrf
                             <input name="_method" type="hidden" value="DELETE">
-                            <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete'><span class="las la-trash"></span></button>
+                            <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title='Delete Ticket'><span class="las la-trash"></span></button>
                           </form>
                         </td>
                     </tr>

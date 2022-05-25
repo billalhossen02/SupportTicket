@@ -76,7 +76,7 @@
 
     <main class="content">
       <div class="container p-0">
-        <h1 class="h3 mb-3">Ticket No #{{$data->id}}</h1><hr>
+        <h1 class="h3 mb-3">Ticket No #{{$data->id}}</h1><span style="color:rgb(138, 24, 24)">{{ $data->subject }}</span><hr>
           <div class="col-12 col-lg-7 col-xl-9">
             <div class="position-relative">
               <div class="chat-messages p-6">
@@ -100,26 +100,17 @@
 
                         @if($item->attachment)
 
-                        {{-- <a href="{{url('show/'.$item->id)}}">
-                          <img src="{{asset('storage/'.$item->attachment)}}" style="height: 150px; width: 100px; margin-left:70px;">
-                        </a> --}}
-
                         @php
-
                         $i = 1;
                         $file_name = $item->attachment;
                         $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-                        // echo $extension;
-
                         @endphp
 
                             @if($extension == 'jpg' || $extension == 'png')
 
                             @foreach(explode('|',$item->attachment) as $image)
                             <div class="row">
-                                {{-- @dd($image); --}}
                               <a style="margin-left: 70px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}</a>
-                              {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
                             </div>
                             @endforeach
 
@@ -127,15 +118,9 @@
 
                             @foreach(explode('|',$item->attachment) as $image)
                             <div class="row">
-                                {{-- @dd($image); --}}
                                 <a style="margin-left: 70px" href="{{url('show/')}}?image={{$image}}"> Attachment{{$i++}}</a>
-                              {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
                             </div>
                             @endforeach
-
-                            {{-- @elseif ($extension == 'pdf')
-
-                            <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a> --}}
 
                             @endif
 
@@ -157,21 +142,16 @@
                         </div>
 
                         @php
-
                         $i = 1;
                         $file_name = $item->attachment;
                         $extension = pathinfo($file_name, PATHINFO_EXTENSION);
-                        // echo $extension;
-
                         @endphp
 
                       @if($extension == 'jpg' || $extension == 'png')
 
                       @foreach(explode('|',$item->attachment) as $image)
                       <div class="row">
-                          {{-- @dd($image); --}}
                         <a style="margin-left: 15px" href="{{url('show/')}}?image={{$image}}">Attachment{{$i++}}</a>
-                        {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
                       </div>
                       @endforeach
 
@@ -179,16 +159,11 @@
 
                       @foreach(explode('|',$item->attachment) as $image)
                       <div class="row">
-                          {{-- @dd($image); --}}
                           <a style="margin-left: 15px" href="{{url('show/')}}?image={{$image}}"> Attachment{{$i++}}</a>
-                        {{-- <a href="{{url('show/'.$item->id)}}"><img src="{{asset('storage/'.$image)}}" style="height: 150px; width: 100px;"></a> --}}
                       </div>
                       @endforeach
-
-                       {{-- @elseif ($extension == 'pdf')
-
-                       <a style="margin-left: 15px" href="{{url('show/'.$item->id)}}"> Attachment{{$i++}}.{{$extension}}</a> --}}
-
+                       
+                      
                        @endif
 
                        </div>
@@ -205,7 +180,7 @@
                         @csrf
                             <div class="form-group purple-border">
                               <label for="exampleFormControlTextarea4">Reply</label>
-                              <textarea name="message" class="form-control" id="exampleFormControlTextarea4" rows="1" placeholder="Message"></textarea>
+                              <textarea name="message" class="form-control" id="exampleFormControlTextarea4" rows="2" placeholder="Message"></textarea>
                             </div>
 
                             <div class="form-group">
@@ -230,16 +205,16 @@
                                       <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">See Review</a>
                                   </div>
 
-                                      <div class="row" id="post-review-box" style="display:none;">
-                                          <div class="col-md-6">
+                                  <div class="row" id="post-review-box" style="display:none;">
+                                        <div class="col-md-6">
                                                 <td>{{$rating->comment}}</td>
                                                     <div class="text-right">
                                                         <div class="stars starrrr" name="value" data-rating={{$rating->value}}></div>
                                                           <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
                                                         <span class="glyphicon glyphicon-remove"></span>Closed</a>
-                                                    </div>
-                                          </div>
-                                      </div>
+                                                  </div>
+                                        </div>
+                                  </div>
                             </div>
                           </div>
                         </div>
@@ -258,6 +233,7 @@
                                 <div class="row" id="post-review-box" style="display:none;">
                                     <div class="col-md-12">
                                         <form accept-charset="UTF-8" action="{{url('rating/'.$data->id)}}" method="post">
+                                         
                                           @csrf
                                             <input id="ratings-hidden" name="rating" type="hidden">
                                             <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
@@ -268,6 +244,7 @@
                                                 <span class="glyphicon glyphicon-remove"></span>Cancel</a>
                                                 <button class="btn btn-success btn-lg" type="submit">Save</button>
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>
